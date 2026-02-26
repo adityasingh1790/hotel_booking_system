@@ -64,4 +64,8 @@ public class RoomService {
 
         return roomRepository.save(room);
     }
+    
+    public List<Room> filterByPriceRange(Double minPrice, Double maxPrice) {
+        return roomRepository.findByPriceBetween(minPrice, maxPrice);
+    }
 }

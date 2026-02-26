@@ -61,6 +61,7 @@ public class RoomController {
         );
     }
     
+    //check all available room
     @GetMapping("/available")
     public ResponseEntity<ApiResponse<List<Room>>> getAvailableRooms() {
 
@@ -71,6 +72,7 @@ public class RoomController {
         );
     }
     
+    // update room availabilty status
     @PutMapping("/{roomId}/availability")
     public ResponseEntity<ApiResponse<Room>> updateRoomAvailability(
             @PathVariable Long roomId,
@@ -80,6 +82,19 @@ public class RoomController {
 
         return ResponseEntity.ok(
                 new ApiResponse<>("Room Availability Updated", updatedRoom)
+        );
+    }
+    
+    @GetMapping("/price-range")
+    public ResponseEntity<ApiResponse<List<Room>>> filterRoomsByPrice(
+            @RequestParam Double min,
+            @RequestParam Double max) {
+
+        return ResponseEntity.ok(
+                new ApiResponse<>(
+                        "Rooms filtered by price range",
+                        roomService.filterByPriceRange(min, max)
+                )
         );
     }
 }

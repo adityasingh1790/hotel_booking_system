@@ -5,7 +5,8 @@ import com.hackathon.hotel.service.HotelService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import org.springframework.http.ResponseEntity;
+import com.hackathon.hotel.response.ApiResponse;
 @RestController
 @RequestMapping("/api/hotels")
 @CrossOrigin("*")
@@ -35,9 +36,21 @@ public class HotelController {
         return hotelService.getHotelById(id);
     }
 
-    // Delete Hotel
+    // Delete Hotel by Id
     @DeleteMapping("/{id}")
     public void deleteHotel(@PathVariable Long id) {
         hotelService.deleteHotel(id);
+    }
+    
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<List<Hotel>>> searchHotelByLocation(
+            @RequestParam String location){
+
+        return ResponseEntity.ok(
+                new ApiResponse<>(
+                        "Hotels fetched by location",
+                        hotelService.searchByLocation(location)
+                )
+        );
     }
 }
