@@ -9,4 +9,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findByHotel_Id(Long hotelId);
 
     List<Room> findByAvailableTrue();
+    
+    List<Room> findByPriceBetween(Double minPrice, Double maxPrice);
 }

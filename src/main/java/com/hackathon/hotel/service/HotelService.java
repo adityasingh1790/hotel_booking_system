@@ -34,4 +34,8 @@ public class HotelService {
     public void deleteHotel(Long id) {
         hotelRepository.deleteById(id);
     }
+    
+    public List<Hotel> searchByLocation(String location){
+        return hotelRepository.findByLocationContainingIgnoreCase(location);
+    }
 }
